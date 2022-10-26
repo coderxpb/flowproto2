@@ -1,13 +1,13 @@
-import { useState } from "react";
 import "./App.css";
-import FlowBoard from "./components/organisms/FlowBoard";
+import FlowPage from "./components/pages/FlowPage";
+import { FlowContextProvider } from "./contexts/flowContext";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
-      <FlowBoard />
+      <FlowContextProvider>
+        <FlowPage />
+      </FlowContextProvider>
     </div>
   );
 }
