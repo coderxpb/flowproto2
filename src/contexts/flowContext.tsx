@@ -4,18 +4,31 @@ import React, {
   useContext,
   useCallback,
   useState,
+  useRef,
 } from "react";
-
 import { useNodesState, useEdgesState, updateEdge, addEdge } from "reactflow";
-
 import CustomNode from "../components/molecules/nodes/CustomNode";
 import MessageNode from "../components/molecules/nodes/MessageNode";
+
+let id = 99;
+const getId = () => `newnode_${id++}`;
 
 const nodeTypes = {
   customNode: CustomNode,
   messageNode: MessageNode,
 };
 
+const nodesList = [
+  {
+    name: "Message",
+    type: "messageNode",
+    color: "#1758DE",
+    data: {
+      message: "hello",
+    },
+  },
+  { name: "FFA", type: "customNode", color: "#93D945", data: {} },
+];
 const initialNodes = [
   {
     id: "1",
@@ -63,10 +76,12 @@ const initialEdges = [
 
 const FlowContext = createContext({});
 
-const FlowContextProvider = ({ children }: { children: ReactElement }) => {
+const FlowContextProvider = ({ children }) => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [selectedNode, setSelectedNode] = useState(null);
+  const reactFlowWrapper = useRef(null);
+  const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
   const onEdgeUpdate = useCallback(
     (oldEdge, newConnection) =>
@@ -96,7 +111,13 @@ const FlowContextProvider = ({ children }: { children: ReactElement }) => {
         edges,
         selectedNode,
         nodeTypes,
+        nodesList,
+        reactFlowWrapper,
+        reactFlowInstance,
+        setNodes,
+        getId,
         addNewEdge,
+        setReactFlowInstance,
         onConnect,
         onEdgeUpdate,
         setSelectedNode,
