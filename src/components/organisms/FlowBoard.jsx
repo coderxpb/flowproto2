@@ -8,7 +8,11 @@ import ReactFlow, {
   getConnectedEdges,
 } from "reactflow";
 import "reactflow/dist/style.css";
+import CustomNode from "../molecules/nodes/CustomNode";
 
+const nodeTypes = {
+  customNode: CustomNode,
+};
 const initialNodes = [
   {
     id: "1",
@@ -39,6 +43,18 @@ const initialNodes = [
   {
     id: "6",
     data: { label: "Node E" },
+    position: { x: 800, y: 200 },
+  },
+  {
+    id: "7",
+    type: "customNode",
+    data: {
+      label: "Node E",
+      imageURL: "https://avatars.githubusercontent.com/u/9304091?s=40&v=4",
+      visibleProperties: [
+        { key: "label", type: "text", style: { fontSize: "10px" } },
+      ],
+    },
     position: { x: 800, y: 200 },
   },
 ];
@@ -74,19 +90,22 @@ const FlowBoard = () => {
     setEdges((existingEdges) => addEdge(newEdge, existingEdges));
 
   return (
-    <ReactFlow
-      nodes={nodes}
-      edges={edges}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      snapToGrid
-      onEdgeUpdate={onEdgeUpdate}
-      onConnect={onConnect}
-      fitView
-      attributionPosition="top-right"
-    >
-      <Controls />
-    </ReactFlow>
+    <>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        nodeTypes={nodeTypes}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        snapToGrid
+        onEdgeUpdate={onEdgeUpdate}
+        onConnect={onConnect}
+        fitView
+        attributionPosition="top-right"
+      >
+        <Controls />
+      </ReactFlow>
+    </>
   );
 };
 
