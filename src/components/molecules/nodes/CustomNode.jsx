@@ -1,3 +1,9 @@
+//initial idea/prototype about a highly extensible node, where the node data ends
+//up owning most of its look rather than the component. useful in some cases such
+//as quick/flexible customization/configuration but drawback of deduplicating some
+//of the component level stuff such as header title/styling as well as adding
+//overhead to data such as visible properties
+
 import React, { memo } from "react";
 import { Handle } from "reactflow";
 

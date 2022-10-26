@@ -1,0 +1,19 @@
+.custom-node {
+  width: 180px;
+  min-height: 50px;
+  border-radius: 5px;
+  font-size: 11px;
+
+  box-shadow: 0px 2px 3px 4px #d1d1d1;
+  &-head {
+    height: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    padding-left: 6px;
+  }
+
+  &-body {
+    padding: 6px;
+  }
+}

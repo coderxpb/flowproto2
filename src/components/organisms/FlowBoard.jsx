@@ -9,9 +9,11 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import CustomNode from "../molecules/nodes/CustomNode";
+import MessageNode from "../molecules/nodes/MessageNode";
 
 const nodeTypes = {
   customNode: CustomNode,
+  messageNode: MessageNode,
 };
 const initialNodes = [
   {
@@ -56,6 +58,15 @@ const initialNodes = [
       ],
     },
     position: { x: 800, y: 200 },
+  },
+  {
+    id: "8",
+    type: "messageNode",
+    data: {
+      message:
+        "nodjfk jsalf kjl dsafdsa fdsaf dsa fsdf dsaf dsaf dsaf dsa dsaf dsaf dsafsaf dsa fsa dsa fdsa f",
+    },
+    position: { x: 800, y: 400 },
   },
 ];
 
