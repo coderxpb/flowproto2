@@ -52,21 +52,27 @@ const FlowBoard = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const [sourceEdges, setSourceEdges] = useState({ 1: "2", 2: "3" });
-  // gets called after end of edge gets dragged to another source or target
   const onEdgeUpdate = useCallback(
     (oldEdge, newConnection) =>
       setEdges((els) => updateEdge(oldEdge, newConnection, els)),
     []
   );
-  // const onConnect = useCallback(
-  //   (params) => setEdges((els) => addEdge(params, els)),
-  //   []
-  // );
-  const onConnect = useCallback(
-    (params) => setEdges((els) => addEdge(params, els)),
-    []
-  );
+
+  const onConnect = (newEdge) => {
+    //find source node of connection
+    let sourceNode = edges.find((edge) => edge.source == newEdge.source);
+    if (sourceNode) {
+      //if source node has an existing edge with another target then update the edge
+      if (sourceNode.target != newEdge.target) onEdgeUpdate(sourceNode, newEdge);
+    } else {
+      //if source node doesn't have an edge, create a new edge
+      addNewEdge(newEdge);
+    }
+  };
+
+  const addNewEdge = (newEdge) =>
+    setEdges((existingEdges) => addEdge(newEdge, existingEdges));
+
   return (
     <ReactFlow
       nodes={nodes}
@@ -75,20 +81,7 @@ const FlowBoard = () => {
       onEdgesChange={onEdgesChange}
       snapToGrid
       onEdgeUpdate={onEdgeUpdate}
-      onConnect={(e) => {
-        console.log("on connect", e);
-        if (sourceEdges[e.source]) {
-          if (sourceEdges[e.source] != e.target) {
-            console.log(edges);
-            let node1 = edges.find((ed) => ed.source == e.source);
-            sourceEdges[e.source] = e.target;
-            onEdgeUpdate(node1, e);
-          }
-        } else {
-          sourceEdges[e.source] = e.target;
-          onConnect(e);
-        }
-      }}
+      onConnect={onConnect}
       fitView
       attributionPosition="top-right"
     >
