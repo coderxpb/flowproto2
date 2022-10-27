@@ -1,22 +1,26 @@
 import "./NodeCard.scss";
 
-const NodeCard = ({ iconPath, color, name, type }) => {
-  console.log(type);
-  const onDragStart = (event, nodeType) => {
-    console.log(type);
-    event.dataTransfer.setData("application/reactflow", nodeType);
+const NodeCard = ({ nodeTemplate }) => {
+  const onDragStart = (event, nodeTemplate) => {
+    event.dataTransfer.setData(
+      "application/reactflow",
+      JSON.stringify(nodeTemplate)
+    );
     event.dataTransfer.effectAllowed = "move";
   };
 
   return (
     <div
       className="node-card"
-      onDragStart={(e) => onDragStart(e, type)}
-      style={{ border: `1px solid ${color}`, color: `${color}` }}
+      onDragStart={(e) => onDragStart(e, nodeTemplate)}
+      style={{
+        border: `1px solid ${nodeTemplate.color}`,
+        color: `${nodeTemplate.color}`,
+      }}
       draggable
     >
-      <img className="node-card-icon" src={iconPath} />
-      <p className="node-card-name">{name}</p>
+      <img className="node-card-icon" src={nodeTemplate.iconPath} />
+      <p className="node-card-name">{nodeTemplate.name}</p>
     </div>
   );
 };

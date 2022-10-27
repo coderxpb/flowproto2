@@ -34,10 +34,12 @@ const FlowBoard = () => {
       event.preventDefault();
 
       const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
-      const type = event.dataTransfer.getData("application/reactflow");
+      const nodeTemplate = JSON.parse(
+        event.dataTransfer.getData("application/reactflow")
+      );
 
       // check if the dropped element is valid
-      if (typeof type === "undefined" || !type) {
+      if (typeof nodeTemplate === "undefined" || !nodeTemplate) {
         return;
       }
 
@@ -45,11 +47,12 @@ const FlowBoard = () => {
         x: event.clientX - reactFlowBounds.left,
         y: event.clientY - reactFlowBounds.top,
       });
+      console.log(nodeTemplate.type);
       const newNode = {
         id: getId(),
-        type,
+        type: nodeTemplate.type,
         position,
-        data: { label: `${type} node` },
+        data: JSON.parse(JSON.stringify(nodeTemplate.data)),
       };
 
       setNodes((nds) => nds.concat(newNode));
