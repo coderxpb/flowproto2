@@ -92,9 +92,28 @@ const FlowContextProvider = ({ children }) => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [selectedNode, setSelectedNode] = useState(null);
+  const [status, setStatus] = useState({ showStatus: false });
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
+  const saveHandler = () => {
+    console.log(edges.length, nodes.length);
+    if (edges.length < nodes.length - 1) {
+      setStatus({ showStatus: true, status: false, value: "Cannot save Flow" });
+      setTimeout(() => {
+        setStatus({ showStatus: false });
+      }, 5000);
+    } else {
+      setStatus({
+        showStatus: true,
+        status: true,
+        value: "Flow saved",
+      });
+      setTimeout(() => {
+        setStatus({ showStatus: false });
+      }, 5000);
+    }
+  };
   const onEdgeUpdate = useCallback(
     (oldEdge, newConnection) =>
       setEdges((els) => updateEdge(oldEdge, newConnection, els)),
@@ -126,6 +145,9 @@ const FlowContextProvider = ({ children }) => {
         nodesList,
         reactFlowWrapper,
         reactFlowInstance,
+        status,
+        setStatus,
+        saveHandler,
         setNodes,
         getId,
         addNewEdge,

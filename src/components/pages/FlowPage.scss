@@ -2,12 +2,60 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  &-board {
-    width: 80%;
-  }
+  flex-direction: column;
 
-  &-panels {
-    width: 20%;
-    border-left: 1px solid gainsboro;
+  &-nav {
+    background-color: rgb(243, 243, 243);
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &-button {
+      height: 30px;
+      padding: 0 20px;
+      outline: none;
+      border: 1px solid #344086;
+      border-radius: 5px;
+      cursor: pointer;
+      background: white;
+      color: #344086;
+      font-weight: 600;
+      margin-right: 20px;
+    }
+  }
+  &-body {
+    height: 100%;
+    display: flex;
+
+    &-board {
+      width: 80%;
+    }
+
+    &-panels {
+      width: 20%;
+      border-left: 1px solid gainsboro;
+    }
+  }
+}
+
+.status {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 8px;
+  left: 50%;
+  height: 40px;
+  width: 180px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+
+  &-success {
+    background: greenyellow;
+  }
+  &-failure {
+    background: pink;
   }
 }
