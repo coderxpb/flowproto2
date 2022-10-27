@@ -7,7 +7,7 @@ const NodesPanel = () => {
   return (
     <aside className="nodes-panel">
       {nodesList.map((node) => (
-        <NodeCard nodeTemplate={node} key={node.type} />
+        <NodeCard nodeTemplate={node} key={node.type + node.data.name} />
       ))}
     </aside>
   );

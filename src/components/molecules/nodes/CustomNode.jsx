@@ -6,6 +6,7 @@
 
 import React, { memo } from "react";
 import { Handle } from "reactflow";
+import "./CustomNode.scss";
 
 const CustomNode = ({ data }) => {
   return (
@@ -15,27 +16,37 @@ const CustomNode = ({ data }) => {
         position="left"
         onConnect={(params) => console.log("handle onConnect", params)}
       />
-      <div>Header</div>
-
-      {data.visibleProperties &&
-        data.visibleProperties.map((property) => {
-          switch (property.type) {
-            case "text":
-              return (
-                <p key={property.key} style={property.style}>
-                  {data[property.key]}
-                </p>
-              );
-            case "image":
-              return (
-                <img
-                  key={property.key}
-                  style={property.style}
-                  src={data[property.key]}
-                />
-              );
-          }
-        })}
+      <div className="custom-node">
+        <div className="custom-node-head">
+          <p className="custom-node-head-title">{data.name}</p>
+        </div>
+        <div className="custom-node-body">
+          {data.data &&
+            data.data.map((property, index) => {
+              switch (property.type) {
+                case "text":
+                  return (
+                    <p
+                      key={`text${index}`}
+                      style={property.style}
+                      className="custom-node-body-text"
+                    >
+                      {property.value}
+                    </p>
+                  );
+                case "image":
+                  return (
+                    <img
+                      key={`image${index}`}
+                      style={property.style}
+                      src={property.value}
+                      className="custom-node-body-image"
+                    />
+                  );
+              }
+            })}
+        </div>
+      </div>
 
       <Handle type="source" position="right" />
     </>

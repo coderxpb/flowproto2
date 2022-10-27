@@ -20,7 +20,7 @@ const NodeCard = ({ nodeTemplate }) => {
       draggable
     >
       <img className="node-card-icon" src={nodeTemplate.iconPath} />
-      <p className="node-card-name">{nodeTemplate.name}</p>
+      <p className="node-card-name">{nodeTemplate.data.name}</p>
     </div>
   );
 };

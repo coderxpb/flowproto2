@@ -20,37 +20,54 @@ const nodeTypes = {
 
 const nodesList = [
   {
-    name: "Message",
     type: "messageNode",
     color: "#1758DE",
     data: {
+      name: "Message",
       message: "hello",
+      data: [{ type: "text", value: "hello" }],
     },
   },
-  { name: "FFA", type: "customNode", color: "#93D945", data: {} },
+  {
+    type: "customNode",
+    color: "#93D945",
+    data: {
+      name: "Custom Text",
+      data: [{ type: "text", value: "hello2" }],
+    },
+  },
+  {
+    type: "customNode",
+    color: "#12B8F2",
+    data: {
+      name: "Custom Text and Image",
+      data: [
+        { type: "text", value: "hello3" },
+        {
+          type: "image",
+          value: "https://avatars.githubusercontent.com/u/9304091?s=96&v=4",
+        },
+      ],
+    },
+  },
+  {
+    type: "customNode",
+    color: "#4227F2",
+    data: {
+      name: "Custom Image",
+      data: [
+        {
+          type: "image",
+          value: "https://avatars.githubusercontent.com/u/9304091?s=96&v=4",
+        },
+      ],
+    },
+  },
 ];
 
 const initialNodes = [
   {
     id: "1",
-    type: "input",
-    data: { label: "Node A" },
-    position: { x: 250, y: 0 },
-  },
-  {
-    id: "7",
-    type: "customNode",
-    data: {
-      label: "Node E",
-      imageURL: "https://avatars.githubusercontent.com/u/9304091?s=40&v=4",
-      visibleProperties: [
-        { key: "label", type: "text", style: { fontSize: "10px" } },
-      ],
-    },
-    position: { x: 800, y: 200 },
-  },
-  {
-    id: "8",
     type: "messageNode",
     data: {
       message:
@@ -60,10 +77,7 @@ const initialNodes = [
   },
 ];
 
-const initialEdges = [
-  { id: "e1-2", source: "1", target: "2" },
-  { id: "e1-3", source: "2", target: "3" },
-];
+const initialEdges = [];
 
 const FlowContext = createContext({});
 
