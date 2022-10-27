@@ -97,23 +97,34 @@ const FlowContextProvider = ({ children }) => {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
   const saveHandler = () => {
-    console.log(edges.length, nodes.length);
-    if (edges.length < nodes.length - 1) {
-      setStatus({ showStatus: true, status: false, value: "Cannot save Flow" });
-      setTimeout(() => {
-        setStatus({ showStatus: false });
-      }, 5000);
-    } else {
-      setStatus({
-        showStatus: true,
-        status: true,
-        value: "Flow saved",
+    let isSuccess = false;
+    if (edges.length >= nodes.length - 1) {
+      let targets = {};
+      let uniqueTargetsCount = 0;
+
+      edges.forEach((edge) => {
+        if (!targets[edge.target]) {
+          targets[edge.target] = true;
+          uniqueTargetsCount += 1;
+        }
       });
-      setTimeout(() => {
-        setStatus({ showStatus: false });
-      }, 5000);
+
+      if (uniqueTargetsCount >= nodes.length - 1) {
+        isSuccess = true;
+      }
     }
+
+    setStatus({
+      showStatus: true,
+      status: isSuccess,
+      value: isSuccess ? "Flow saved" : "Cannot save Flow",
+    });
+
+    setTimeout(() => {
+      setStatus({ showStatus: false });
+    }, 5000);
   };
+
   const onEdgeUpdate = useCallback(
     (oldEdge, newConnection) =>
       setEdges((els) => updateEdge(oldEdge, newConnection, els)),
