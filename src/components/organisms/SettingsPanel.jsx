@@ -3,9 +3,12 @@ import "./SettingsPanel.scss";
 
 const SettingsPanel = () => {
   const { selectedNode, setSelectedNode, setNodes } = useFlow();
+
   const changeHandler = (newValue, index) => {
+    //update selected node's i'th data value
     selectedNode.data.data[index].value = newValue;
 
+    //setNode with updated node to reflect update
     setNodes((nds) =>
       nds.map((node) => {
         if (node.id == selectedNode.id) {

@@ -6,7 +6,7 @@
 
 //nvm works better with settings panel
 
-import React, { memo } from "react";
+import React from "react";
 import { Handle } from "reactflow";
 import "./CustomNode.scss";
 

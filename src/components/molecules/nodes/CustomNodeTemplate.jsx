@@ -1,4 +1,6 @@
-import React, { memo } from "react";
+//justa wrapper for other custom nodes
+
+import Reac from "react";
 import { Handle } from "reactflow";
 import "./CustomNodeTemplate.scss";
 

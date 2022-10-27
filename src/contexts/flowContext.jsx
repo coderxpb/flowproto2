@@ -107,10 +107,13 @@ const FlowContextProvider = ({ children }) => {
 
   const saveHandler = () => {
     let isSuccess = false;
+
+    //legal flows cannot have edges lower than n-1
     if (edges.length >= nodes.length - 1) {
       let targets = {};
       let uniqueTargetsCount = 0;
 
+      //if targets doesn't have an edge's target node, it must be new so add it to unique count
       edges.forEach((edge) => {
         if (!targets[edge.target]) {
           targets[edge.target] = true;

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import ReactFlow from "reactflow";
 import "reactflow/dist/style.css";
 import { useFlow } from "../../contexts/flowContext";
@@ -20,8 +20,10 @@ const FlowBoard = () => {
     setNodes,
   } = useFlow();
 
+  //hide settings panel on flow board click
   const onPaneClicked = () => setSelectedNode(null);
 
+  //show settings panel on node click
   const onNodeClicked = (e, node) => setSelectedNode(node);
 
   const onDragOver = useCallback((event) => {
