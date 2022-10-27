@@ -3,7 +3,9 @@ import CustomNodeTemplate from "./CustomNodeTemplate";
 
 export default memo(({ data, isConnectable }) => {
   return (
-    <CustomNodeTemplate head={{ title: "Send Message", color: "#9BDED8" }}>
+    <CustomNodeTemplate
+      head={{ title: "Send Message", color: "#9BDED8", bIcon: "bi-chat-text" }}
+    >
       <p>{data.data[0].value}</p>
     </CustomNodeTemplate>
   );

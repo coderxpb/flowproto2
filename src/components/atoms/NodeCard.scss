@@ -3,11 +3,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 10px;
 
   height: 70px;
-  width: 45%;
-  min-width: 160px;
+  width: 160px;
 
   border-radius: 5px;
   font-size: 13px;
@@ -18,7 +17,12 @@
   user-select: none; /* Standard syntax */
 
   &-icon {
+    font-size: 24px;
   }
   &-name {
+  }
+
+  &:hover {
+    background-color: rgba(242, 242, 242, 0.671);
   }
 }

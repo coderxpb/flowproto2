@@ -19,7 +19,9 @@ const NodeCard = ({ nodeTemplate }) => {
       }}
       draggable
     >
-      <img className="node-card-icon" src={nodeTemplate.iconPath} />
+      {nodeTemplate.data.bIcon && (
+        <i className={`bi ${nodeTemplate.data.bIcon} node-card-icon`}></i>
+      )}
       <p className="node-card-name">{nodeTemplate.data.name}</p>
     </div>
   );

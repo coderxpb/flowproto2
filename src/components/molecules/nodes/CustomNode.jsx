@@ -17,9 +17,13 @@ const CustomNode = ({ data }) => {
         type="target"
         position="left"
         onConnect={(params) => console.log("handle onConnect", params)}
+        style={{ background: "gray" }}
       />
       <div className="custom-node">
         <div className="custom-node-head">
+          {data.bIcon && (
+            <i className={`bi ${data.bIcon} custom-node-head-icon`}></i>
+          )}
           <p className="custom-node-head-title">{data.name}</p>
         </div>
         <div className="custom-node-body">
@@ -50,7 +54,7 @@ const CustomNode = ({ data }) => {
         </div>
       </div>
 
-      <Handle type="source" position="right" />
+      <Handle type="source" position="right" style={{ background: "gray" }} />
     </>
   );
 };

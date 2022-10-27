@@ -5,7 +5,13 @@ import React, {
   useState,
   useRef,
 } from "react";
-import { useNodesState, useEdgesState, updateEdge, addEdge } from "reactflow";
+import {
+  useNodesState,
+  useEdgesState,
+  updateEdge,
+  addEdge,
+  MarkerType,
+} from "reactflow";
 import CustomNode from "../components/molecules/nodes/CustomNode";
 import MessageNode from "../components/molecules/nodes/MessageNode";
 
@@ -26,6 +32,7 @@ const nodesList = [
     data: {
       name: "Message",
       message: "hello",
+      bIcon: "bi-chat-text",
       data: [{ type: "text", value: "hello" }],
     },
   },
@@ -34,6 +41,7 @@ const nodesList = [
     color: "#93D945",
     data: {
       name: "Text",
+      bIcon: "bi-chat-dots",
       data: [{ type: "text", value: "hello2" }],
     },
   },
@@ -56,6 +64,7 @@ const nodesList = [
     color: "#4227F2",
     data: {
       name: "Image",
+      bIcon: "bi-card-image",
       data: [
         {
           type: "image",
@@ -139,7 +148,13 @@ const FlowContextProvider = ({ children }) => {
       if (sourceNode.target != newEdge.target) onEdgeUpdate(sourceNode, newEdge);
     } else {
       //if source node doesn't have an edge, create a new edge
-      addNewEdge(newEdge);
+      //also adding an arrow head at the end of connection
+      addNewEdge({
+        ...newEdge,
+        markerEnd: {
+          type: MarkerType.ArrowClosed,
+        },
+      });
     }
   };
 
