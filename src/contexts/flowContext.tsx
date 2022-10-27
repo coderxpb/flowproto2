@@ -1,6 +1,5 @@
 import React, {
   createContext,
-  ReactElement,
   useContext,
   useCallback,
   useState,
@@ -18,6 +17,8 @@ const nodeTypes = {
   messageNode: MessageNode,
 };
 
+//all the nodes that can be dragged and dropped on the nodes panel, supports custom
+//nodes or extend CustomNode
 const nodesList = [
   {
     type: "messageNode",
@@ -32,7 +33,7 @@ const nodesList = [
     type: "customNode",
     color: "#93D945",
     data: {
-      name: "Custom Text",
+      name: "Text",
       data: [{ type: "text", value: "hello2" }],
     },
   },
@@ -40,7 +41,7 @@ const nodesList = [
     type: "customNode",
     color: "#12B8F2",
     data: {
-      name: "Custom Text and Image",
+      name: "Text and Image",
       data: [
         { type: "text", value: "hello3" },
         {
@@ -54,7 +55,7 @@ const nodesList = [
     type: "customNode",
     color: "#4227F2",
     data: {
-      name: "Custom Image",
+      name: "Image",
       data: [
         {
           type: "image",
@@ -70,8 +71,14 @@ const initialNodes = [
     id: "1",
     type: "messageNode",
     data: {
-      message:
-        "nodjfk jsalf kjl dsafdsa fdsaf dsa fsdf dsaf dsaf dsaf dsa dsaf dsaf dsafsaf dsa fsa dsa fdsa f",
+      name: "Message",
+      data: [
+        {
+          type: "text",
+          value:
+            "nodjfk jsalf kjl dsafdsa fdsaf dsa fsdf dsaf dsaf dsaf dsa dsaf dsaf dsafsaf dsa fsa dsa fdsa f",
+        },
+      ],
     },
     position: { x: 800, y: 400 },
   },

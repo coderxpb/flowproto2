@@ -4,6 +4,8 @@
 //of the component level stuff such as header title/styling as well as adding
 //overhead to data such as visible properties
 
+//nvm works better with settings panel
+
 import React, { memo } from "react";
 import { Handle } from "reactflow";
 import "./CustomNode.scss";
